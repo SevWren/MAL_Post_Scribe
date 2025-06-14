@@ -54,3 +54,102 @@ Summary of Changes for MAL Post Scribe Project (as of 6/13/2025 based on current
 
 8.  **General Code Structure & React Components:**
     *   Maintained React-based architecture with functional components, `useState`, `useEffect`, and `useRef`.
+
+---
+**Project Update for GitHub Pages Deployment & Local Tailwind CSS (June 14, 2025) - Appended**
+
+- **Project Configuration for GitHub Pages:**
+    - Modified `vite.config.ts`:
+        - Set `base: './'` for relative asset paths.
+        - Set `build.outDir: 'docs'`.
+        - Set `build.assetsDir: 'assets'`.
+    - Updated `package.json`:
+        - Changed `build` script to `rimraf docs && vite build`.
+        - Added `rimraf` as a dev dependency.
+    - Created `docs/404.html`.
+    - Added `docs/CNAME`.
+- **Local Tailwind CSS Integration:**
+    - Installed `tailwindcss`, `postcss`, `autoprefixer`.
+    - Configured `tailwind.config.js`, `postcss.config.js`.
+    - Created `index.css` and imported into `index.tsx`.
+    - Removed Tailwind CDN from `index.html`.
+    - Verified dark mode in `App.tsx`.
+---
+
+---
+**Project Update for GitHub Pages Deployment & Local Tailwind CSS (June 14, 2025)**
+
+- **Project Configuration for GitHub Pages:**
+    - Modified `vite.config.ts`:
+        - Set `base: './'` for relative asset paths, crucial for GitHub Pages.
+        - Set `build.outDir: 'docs'` to output build artifacts to the `/docs` directory, used by GitHub Pages.
+        - Set `build.assetsDir: 'assets'` to organize assets within the `docs` folder.
+    - Updated `package.json`:
+        - Changed the `build` script to `rimraf docs && vite build` to ensure the `docs` directory is cleaned before each build.
+        - Added `rimraf` as a dev dependency for cleaning the output directory.
+    - Created `docs/404.html`: A custom 404 page to improve user experience on the deployed site, with a script to redirect to the homepage.
+    - Added `docs/CNAME`: A placeholder file with instructions for users who wish to configure a custom domain with GitHub Pages.
+
+- **Local Tailwind CSS Integration:**
+    - Installed `tailwindcss`, `postcss`, and `autoprefixer` as development dependencies to manage Tailwind CSS locally.
+    - Created and configured `tailwind.config.js` (specifying content paths and `darkMode: 'class'`) and `postcss.config.js` (listing Tailwind CSS and Autoprefixer plugins).
+    - Created `index.css` in the project root, containing the standard `@tailwind base; @tailwind components; @tailwind utilities;` directives.
+    - Imported `index.css` into `index.tsx` to ensure Tailwind styles are applied globally.
+    - Removed the Tailwind CSS CDN script and related inline configuration/dark mode scripts from `index.html`, as styles are now processed locally.
+    - Verified that the existing dark mode functionality, managed within `App.tsx` (state initialization and `useEffect` hook), remains operational and correctly applies themes.
+---
+
+1.  **AI Interaction Modal (`AiInteractionModal.tsx`):**
+    *   **Gemini AI Feature:**
+        *   Allows users to generate BBCode using the Gemini AI (`gemini-2.5-flash-preview-04-17`).
+        *   Uses a detailed system instruction to guide the AI to produce MyAnimeList-compatible BBCode.
+        *   The AI-generated BBCode is shown in a dedicated, read-only textarea.
+        *   A button allows users to copy the AI's response.
+    *   **Gemini API Key Management:**
+        *   Users can input and save their Gemini API key.
+        *   The key is stored in the browser's `localStorage`.
+        *   A link to `https://aistudio.google.com/apikey` is provided.
+    *   **Deepgram Speech-to-Text Integration:**
+        *   **Feature:** Integrated Deepgram SDK for speech-to-text transcription directly into the user prompt input area.
+        *   **Functionality:**
+            *   A "Record Audio" button allows users to start/stop recording.
+            *   Audio is streamed to Deepgram's live transcription service.
+            *   Finalized transcriptions are appended to the user prompt textarea.
+        *   **API Key:** Uses a hardcoded Deepgram API key (`f7f55f1e94ea11f1cb5bbc0d2381e7b7b3525b91`) as requested.
+        *   **User Feedback:** Displays status messages (e.g., "Initializing microphone...", "Recording...", "Transcript received.") and errors related to microphone access or Deepgram service.
+        *   **UI/UX:** The record button changes label and appearance to reflect its state (idle, recording, processing). The prompt textarea is disabled during active recording/transcription.
+    *   **User Experience (General):**
+        *   Includes loading indicators during API calls (Gemini).
+        *   Provides error messages for issues like missing API key, empty prompt, or API errors (Gemini & Deepgram).
+    *   **Layout & Resizing:**
+        *   Textareas for user prompt and AI response are resizable.
+        *   Layout managed to accommodate resizing and prevent breaking, using flex properties and `shrink-0` on static elements.
+
+2.  **Editor Toolbar (`EditorToolbar.tsx`):**
+    *   **AI Button:** An "AI" button opens the `AiInteractionModal`.
+    *   **Table Button Enhancement:** The "Table" button reveals a grid of table dimension options (1x1 to 3x3) for easier insertion.
+
+3.  **BBCode Parser (`services/bbcodeParser.ts`):**
+    *   **Spoiler Fix:** Corrected spoiler button functionality for reliable content reveal.
+    *   **Newline Handling:** Refined newline-to-`<br />` conversion and cleanup for better visual spacing.
+    *   **Code/Pre Block Trimming:** Trimmed whitespace from `[code]` and `[pre]` blocks.
+
+4.  **Metadata (`metadata.json`):**
+    *   **Microphone Permission:** Added `"microphone"` to `requestFramePermissions` to enable speech-to-text functionality.
+
+5.  **HTML Setup (`index.html`):**
+    *   **Import Map:**
+        *   Added `@google/genai` for the Gemini SDK.
+        *   Added `@deepgram/sdk` for the Deepgram SDK.
+    *   **Tailwind Configuration:** Explicitly set `darkMode: 'class'` for Tailwind CSS.
+    *   **Theme Initialization Script:** Refined script for applying dark/light theme based on `localStorage` or system preference.
+
+6.  **Default Content & Styling:**
+    *   **Initial BBCode (`constants.ts`):** Updated default BBCode to showcase features.
+    *   **Text Size:** Increased default font sizes for better readability.
+
+7.  **Theme Toggle (Dark/Light Mode):**
+    *   JavaScript logic for theme toggling, `localStorage` updates, and `document.documentElement` class manipulation confirmed to be functioning correctly.
+
+8.  **General Code Structure & React Components:**
+    *   Maintained React-based architecture with functional components, `useState`, `useEffect`, and `useRef`.
