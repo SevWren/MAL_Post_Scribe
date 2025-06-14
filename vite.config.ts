@@ -4,7 +4,7 @@ import { defineConfig, loadEnv } from 'vite';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      base: './',
+      base: '/MAL_Post_Scribe/',
       build: {
         outDir: 'docs',
         assetsDir: 'assets'
