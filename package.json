@@ -5,17 +5,21 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "rimraf docs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "@deepgram/sdk": "^3.3.5",
     "@google/genai": "0.15.0",
-    "@deepgram/sdk": "^3.3.5"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.5",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4.1.10",
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
   }
