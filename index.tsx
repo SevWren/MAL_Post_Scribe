@@ -1,3 +1,4 @@
+import './index.css';
 /**
  * @file Entry point for the React application.
  * Mounts the main App component to the DOM.

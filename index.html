@@ -4,42 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MAL Post Scribe</title>
-    <script>
-      // Explicitly configure Tailwind CSS before loading the CDN script
-      // to ensure 'class' strategy is used for dark mode.
-      window.tailwind = {
-        darkMode: 'class',
-      };
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Apply dark mode preference from localStorage or system settings
-      // and ensure localStorage.theme is set consistently.
-      (() => {
-        let themeToApply;
-        const storedTheme = localStorage.theme;
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (storedTheme === 'dark') {
-          themeToApply = 'dark';
-        } else if (storedTheme === 'light') {
-          themeToApply = 'light';
-        } else if (systemPrefersDark) {
-          themeToApply = 'dark';
-          localStorage.theme = 'dark'; // Set if derived from system and not in localStorage
-        } else {
-          themeToApply = 'light';
-          localStorage.theme = 'light'; // Set if derived from system and not in localStorage (or no preference)
-        }
-
-        if (themeToApply === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          // Ensure .dark is removed if theme is light or not set (defaults to light)
-          document.documentElement.classList.remove('dark');
-        }
-      })();
-    </script>
   <script type="importmap">
 {
   "imports": {
